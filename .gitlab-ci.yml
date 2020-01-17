@@ -3,6 +3,6 @@ services:
 - docker:dind
 
 build:
-    stage: build
+    stage: run
     script:
         - uname -a
