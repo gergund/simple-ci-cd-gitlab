@@ -3,10 +3,12 @@ services:
 - docker:dind
 
 before_script:
+    - docker info
     - apk add --no-cache py2-pip python-dev libffi-dev openssl-dev gcc libc-dev make && pip install docker-compose
 
 build:
     stage: build
     script:
+        - docker info
         - docker-compose --version
         - docker-compose build
