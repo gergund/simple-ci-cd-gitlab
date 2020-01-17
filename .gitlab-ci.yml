@@ -1,8 +1,12 @@
-image: docker:latest
-services:
-- docker:dind
+stages:
+  - build
 
-build:
-    stage: run
-    script:
-        - uname -a
+build_container:
+  stage: build
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  script:
+    - uname -a
