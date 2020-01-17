@@ -8,5 +8,5 @@ before_script:
 build:
     stage: build
     script:
-        - docker info
         - docker-compose --version
+        - docker-compose build
