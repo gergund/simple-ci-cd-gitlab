@@ -10,6 +10,6 @@ build:
     script:
         - docker-compose build
 run:
-    stage: run
+    stage: build
     script:
         - docker-compose up -d
