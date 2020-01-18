@@ -14,6 +14,5 @@ before_script:
 build nginx:
     stage: build
     script:
-        - docker build docker/nginx/ --tag $CI_REGISTRY_USER/magento_nginx:latest --tag $CI_REGISTRY_USER:$CI_COMMIT_SHA
-        - docker push $CI_REGISTRY_USER/magento_nginx:latest
-        - docker push $REGISTRY_EXTERNAL_URL:$CI_COMMIT_SHA
+        - docker build docker/nginx/ --tag $CI_REGISTRY_USER/$REGISTRY_EXTERNAL_URL:magento_nginx --tag $CI_REGISTRY_USER/$REGISTRY_EXTERNAL_URL:$CI_COMMIT_SHA
+        - docker push $CI_REGISTRY_USER/$REGISTRY_EXTERNAL_URL:magento_nginx
