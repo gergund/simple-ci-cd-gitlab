@@ -9,11 +9,11 @@ services:
 
 before_script:
     - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY_EXTERNAL_URL
-
+    
 build nginx:
     stage: build
     script:
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY_EXTERNAL_URL
         - docker build docker/nginx/ --tag $REGISTRY_EXTERNAL_URL/magento_nginx:latest --tag $REGISTRY_EXTERNAL_URL:$CI_COMMIT_SHA
         - docker push $REGISTRY_EXTERNAL_URL/magento_nginx:latest
         - docker push $REGISTRY_EXTERNAL_URL:$CI_COMMIT_SHA
