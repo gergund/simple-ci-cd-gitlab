@@ -14,6 +14,11 @@ before_script:
 build nginx:
     stage: build
     script:
-        - docker build docker/nginx/ --tag $REGISTRY_EXTERNAL_URL/magento/ci-cd:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento/ci-cd:latest 
-        - docker push $REGISTRY_EXTERNAL_URL/magento/ci-cd:$CI_COMMIT_SHA
-        - docker push $REGISTRY_EXTERNAL_URL/magento/ci-cd:latest
+        - docker pull $REGISTRY_EXTERNAL_URL/magento_nginx:latest
+        - docker build docker/nginx/ --cache-from $REGISTRY_EXTERNAL_URL/magento_nginx:latest --tag $REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento_nginx:latest 
+        - docker push $REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA
+        - docker push $REGISTRY_EXTERNAL_URL/magento_nginx:latest
+        - docker pull $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
+        - docker build docker/php-fpm/ --cache-from $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest --tag $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
+        - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA
+        - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
