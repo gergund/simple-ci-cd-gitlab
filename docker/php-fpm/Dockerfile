@@ -51,10 +51,7 @@ ADD conf/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 ADD entrypoint.sh /entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
-RUN mkdir -p /magento-code/ \
-    && git clone https://github.com/gergund/project-template.git /magento-code/ \
-    && cd /magento-code/ \ 
-    && git checkout master
+ADD ./magento-code /magento-code
 
 RUN chown -R www-data:www-data /magento-code/
 RUN chown -R www-data:www-data /var/www/html/
