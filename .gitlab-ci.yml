@@ -14,11 +14,11 @@ before_script:
 build nginx:
     stage: build
     script:
-        - docker pull $REGISTRY_EXTERNAL_URL/magento_nginx:latest
+        - docker pull $REGISTRY_EXTERNAL_URL/magento_nginx:latest || true
         - docker build docker/nginx/ --cache-from $REGISTRY_EXTERNAL_URL/magento_nginx:latest --tag $REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento_nginx:latest 
         - docker push $REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA
         - docker push $REGISTRY_EXTERNAL_URL/magento_nginx:latest
-        - docker pull $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
+        - docker pull $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest || true
         - docker build docker/php-fpm/ --cache-from $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest --tag $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
         - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA
         - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
