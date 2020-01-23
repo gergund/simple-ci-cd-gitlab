@@ -26,5 +26,7 @@ build:
 deploy:
     stage: deploy
     image: bitnami/kubectl:latest
+    services:
+        - kubectl
     script: 
         - kubectl version
