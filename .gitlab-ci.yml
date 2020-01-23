@@ -11,7 +11,7 @@ before_script:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY_EXTERNAL_URL
 
-build nginx:
+build:
     stage: build
     script:
         - docker pull $REGISTRY_EXTERNAL_URL/magento_nginx:latest || true
@@ -22,3 +22,8 @@ build nginx:
         - docker build docker/php-fpm/ --cache-from $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest --tag $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
         - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA
         - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
+        
+deploy:
+    stage: deploy
+    script: 
+        - kubectl version
