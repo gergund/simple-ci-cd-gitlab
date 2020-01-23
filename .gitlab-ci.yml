@@ -9,8 +9,7 @@ services:
 
 stages:
  - build
- - build-jar
- - build-image
+ - deploy
 
 build:
     stage: build
@@ -25,13 +24,9 @@ build:
         - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA
         - docker push $REGISTRY_EXTERNAL_URL/magento_php-fpm:latest
         
-build_java_jar:
-  stage: build-jar
+deploy:
+  stage: deploy
   image: bitnami/kubectl:latest
+  entrypoint: ["/bin/bash"]
   script:
     - 'kubectl version'
-    
-build_image_docker:
-  stage: build-image
-  script:
-    - 'docker --version'
