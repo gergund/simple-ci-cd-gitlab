@@ -12,13 +12,10 @@ stages:
  - build-jar
  - build-image
 
-before_script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY_EXTERNAL_URL
-
 build:
     stage: build
     script:
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY_EXTERNAL_URL
         - docker pull $REGISTRY_EXTERNAL_URL/magento_nginx:latest || true
         - docker build docker/nginx/ --cache-from $REGISTRY_EXTERNAL_URL/magento_nginx:latest --tag $REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA --tag $REGISTRY_EXTERNAL_URL/magento_nginx:latest 
         - docker push $REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA
