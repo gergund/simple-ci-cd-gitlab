@@ -26,7 +26,8 @@ build:
         
 deploy:
   stage: deploy
-  image: bitnami/kubectl:latest
-  entrypoint: ["/bin/bash"]
+  image: 
+    name: bitnami/kubectl:latest
+    entrypoint: ["/bin/bash"]
   script:
     - 'kubectl version'
