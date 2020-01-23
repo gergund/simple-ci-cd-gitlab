@@ -27,11 +27,9 @@ build:
         
 build_java_jar:
   stage: build-jar
-  image: maven:3.6.1-jdk-8-slim
+  image: bitnami/kubectl:latest
   script:
-    - 'java -version'
-    - 'mnv --version'
-    - 'mvn install'
+    - 'kubectl version'
     
 build_image_docker:
   stage: build-image
