@@ -7,6 +7,11 @@ variables:
 services:
 - docker:19.03.1-dind
 
+stages:
+ - build
+ - build-jar
+ - build-image
+
 before_script:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY_EXTERNAL_URL
@@ -30,3 +35,8 @@ build_java_jar:
     - 'java -version'
     - 'mnv --version'
     - 'mvn install'
+    
+build_image_docker:
+  stage: build-image
+  script:
+    - 'docker --version'
