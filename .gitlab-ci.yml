@@ -28,4 +28,5 @@ deploy:
   stage: deploy
   image: roffe/kubectl:latest
   script:
+    - 'bash kubernetes/deploy-src/common.bash'
     - 'kubectl version'
