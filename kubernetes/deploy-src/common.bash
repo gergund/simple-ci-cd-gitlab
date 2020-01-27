@@ -28,3 +28,4 @@ create_kubeconfig() {
 
 
 echo_test
+create_kubeconfig
