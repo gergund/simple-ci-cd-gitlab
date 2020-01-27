@@ -29,4 +29,5 @@ deploy:
   image: roffe/kubectl:latest
   script:
     - 'bash kubernetes/deploy-src/common.bash'
-    - 'kubectl version'
+    - 'kubectl --kubeconfig=kubernetes/deploy-src/kubeconfig version'
+    - sleep 600
