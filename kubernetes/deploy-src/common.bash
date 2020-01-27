@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 echo_test() {
 	echo "Common BASH script is running ..."
@@ -26,4 +27,4 @@ create_kubeconfig() {
 }
 
 
-echo_test()
+echo_test
