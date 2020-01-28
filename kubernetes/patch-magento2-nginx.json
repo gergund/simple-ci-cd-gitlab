@@ -5,7 +5,7 @@
             "containers": [
                {
                   "name": "magento2-nginx",
-                  "image": "{VERSION}"
+                  "image": "{REGISTRY}/magento_nginx:{VERSION}"
                }
             ]
          }

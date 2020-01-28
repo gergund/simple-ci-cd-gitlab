@@ -5,7 +5,7 @@
             "containers": [
                {
                   "name": "magento2-php-fpm",
-                  "image": "{VERSION}"
+                  "image": "{REGISTRY}/magento_php-fpm:{VERSION}"
                }
             ]
          }

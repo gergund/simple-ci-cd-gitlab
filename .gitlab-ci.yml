@@ -30,7 +30,9 @@ deploy:
   script:
     - bash kubernetes/deploy-src/common.bash
     - kubectl --kubeconfig=./kubeconfig version
-    - sed -e "s/{VERSION}/$CI_COMMIT_SHA/" kubernetes/patch-magento2-php-fpm.json
-    - sed -e "s/{VERSION}/$CI_COMMIT_SHA/" kubernetes/patch-magento2-nginx.json
+    - sed -i "s/{VERSION}/$CI_COMMIT_SHA/g" kubernetes/patch-magento2-php-fpm.json
+    - sed -i "s/{REGISTRY}/$REGISTRY_EXTERNAL_URL/g" kubernetes/patch-magento2-php-fpm.json
+    - sed -i "s/{VERSION}/$CI_COMMIT_SHA/g" kubernetes/patch-magento2-nginx.json
+    - sed -i "s/{REGISTRY}/$REGISTRY_EXTERNAL_URL/g" kubernetes/patch-magento2-nginx.json
     - kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch "$(cat kubernetes/patch-magento2-php-fpm.json)"
     - kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch "$(cat kubernetes/patch-magento2-nginx.json)"
