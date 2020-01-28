@@ -29,7 +29,6 @@ deploy:
   image: roffe/kubectl:latest
   script:
     - bash kubernetes/deploy-src/common.bash
-    - env
     - kubectl --kubeconfig=./kubeconfig version
-    - "kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch \'{\"spec\": {\"template\": {\"spec\": {\"containers\": [{\"name\": \"magento2-php-fpm\",\"image\": \"$REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA\"}]}}}}\'"
-    - "kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch \'{\"spec\": {\"template\": {\"spec\": {\"containers\": [{\"name\": \"magento2-nginx\",\"image\": \"$REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA\"}]}}}}\'"
+    - sed -e 's/{VERSION}/$CI_COMMIT_SHA/'  kubernetes/patch-magento2-nginx.json
+    - sed -e 's/{VERSION}/$CI_COMMIT_SHA' kubernetes/patch-magento2-php-fpm.json
