@@ -1,0 +1,14 @@
+{
+   "spec": {
+      "template": {
+         "spec": {
+            "containers": [
+               {
+                  "name": "magento2-php-fpm",
+                  "image": "{VERSION}"
+               }
+            ]
+         }
+      }
+   }
+}
