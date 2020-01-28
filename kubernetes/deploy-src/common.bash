@@ -24,6 +24,7 @@ create_kubeconfig() {
     --namespace="$KUBE_NAMESPACE"
   kubectl config use-context gitlab-deploy
   echo ""
+  export KUBECONFIG="$(pwd)/kubeconfig"
 }
 
 
