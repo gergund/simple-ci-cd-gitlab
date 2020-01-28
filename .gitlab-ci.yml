@@ -32,5 +32,5 @@ deploy:
     - kubectl --kubeconfig=./kubeconfig version
     - ls -la
     - env
-    - kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch '{"spec": {"template": {"spec": {"containers": [{"name": "magento2-php-fpm","image": "$REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA"}]}}}}'
-    - kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch '{"spec": {"template": {"spec": {"containers": [{"name": "magento2-nginx","image": "$REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA"}]}}}}'
+    - "kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch '{\"spec\": {\"template\": {\"spec\": {\"containers\": [{\"name\": \"magento2-php-fpm\",\"image\": \"$REGISTRY_EXTERNAL_URL/magento_php-fpm:$CI_COMMIT_SHA\"}]}}}}'"
+    - "kubectl --kubeconfig=./kubeconfig patch statefulset $MAGENTO_STS --patch '{\"spec\": {\"template\": {\"spec\": {\"containers\": [{\"name\": \"magento2-nginx\",\"image\": \"$REGISTRY_EXTERNAL_URL/magento_nginx:$CI_COMMIT_SHA\"}]}}}}'"
