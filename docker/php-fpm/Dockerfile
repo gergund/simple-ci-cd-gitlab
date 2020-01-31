@@ -53,6 +53,8 @@ RUN ["chmod", "+x", "/entrypoint.sh"]
 
 ADD ./magento-code /magento-code
 
+ADD conf/env.php  /magento-code/app/etc/magento-env.php
+
 RUN chown -R www-data:www-data /magento-code/
 RUN chown -R www-data:www-data /var/www/html/
 

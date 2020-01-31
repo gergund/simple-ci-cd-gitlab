@@ -38,5 +38,21 @@ if [ "$RESET_MAGENTO_MODE" = "true" ]; then
 	echo -n "Done"
 fi
 
+if [ "$GENERATE_ENV_PHP" = "true" ]; then
+	sed -i "s/{MYSQL_HOST}/$MAGENTO_MYSQL_HOST/g" /magento-code/app/etc/magento-env.php
+	sed -i "s/{MYSQL_DB}/$MAGENTO_MYSQL_DB/g" /magento-code/app/etc/magento-env.php
+	sed -i "s/{MYSQL_USER}/$MAGENTO_MYSQL_USER/g" /magento-code/app/etc/magento-env.php
+	sed -i "s/{MYSQL_PWD}/$MAGENTO_MYSQL_PASSWORD/g" /magento-code/app/etc/magento-env.php
+	sed -i "s/{REDIS_SESSION_HOST}/$MAGENTO_SESSION_REDIS_HOST/g" /magento-code/app/etc/magento-env.php
+	sed -i "s/{REDIS_CACHE_HOST}/$MAGENTO_CACHE_REDIS_HOST/g" /magento-code/app/etc/magento-env.php
+	sed -i "s/{REDIS_FPC_HOST}/$MAGENTO_FPC_REDIS_HOST/g" /magento-code/app/etc/magento-env.php
+
+	if [ "$(ls -A /var/www/html)" ]; then
+        	cp /magento-code/app/etc/magento-env.php /var/www/html/app/etc/env.php
+        else
+        	echo "/var/www/html is Empty"
+	fi
+fi
+
 echo -n "Executing Arguments..."
 exec "$@"
