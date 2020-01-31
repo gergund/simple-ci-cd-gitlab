@@ -39,6 +39,7 @@ if [ "$RESET_MAGENTO_MODE" = "true" ]; then
 fi
 
 if [ "$GENERATE_ENV_PHP" = "true" ]; then
+	sed -i "s/{ENCRYPT_KEY}/$MAGENTO_ENCRYPT_KEY/g" /magento-code/app/etc/magento-env.php
 	sed -i "s/{MYSQL_HOST}/$MAGENTO_MYSQL_HOST/g" /magento-code/app/etc/magento-env.php
 	sed -i "s/{MYSQL_DB}/$MAGENTO_MYSQL_DB/g" /magento-code/app/etc/magento-env.php
 	sed -i "s/{MYSQL_USER}/$MAGENTO_MYSQL_USER/g" /magento-code/app/etc/magento-env.php

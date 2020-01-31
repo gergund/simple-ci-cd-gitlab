@@ -4,7 +4,7 @@ return [
         'frontName' => 'admin'
     ],
     'crypt' => [
-        'key' => '56a2141591152934b212ff69e6056c09'
+        'key' => '{ENCRYPT_KEY}'
     ],
     'db' => [
         'table_prefix' => '',
