@@ -50,6 +50,11 @@ if [ "$GENERATE_ENV_PHP" = "true" ]; then
 
 	if [ "$(ls -A /var/www/html)" ]; then
         	cp /magento-code/app/etc/magento-env.php /var/www/html/app/etc/env.php
+		cp /magento-code/app/etc/magento-config.php /var/www/html/app/etc/config.php
+
+		chown -R www-data:www-data /var/www/html/app/etc/env.php /var/www/html/app/etc/config.php
+		cd /var/www/html/
+		sudo -u www-data php bin/magento setup:upgrade
         else
         	echo "/var/www/html is Empty"
 	fi
